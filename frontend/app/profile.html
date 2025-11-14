@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile - Travel Planner</title>
+  <link rel="stylesheet" href="/styles/output.css">
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 min-h-screen">
+  <nav class="bg-white dark:bg-gray-800 shadow-sm sticky top-0 z-40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between h-16">
+        <div class="flex items-center">
+          <a href="/app/dashboard.html" class="text-xl font-bold text-primary-600">TravelPlan</a>
+          <div class="hidden md:flex ml-10 space-x-8">
+            <a href="/app/dashboard.html" class="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white py-5">Dashboard</a>
+            <a href="/app/profile.html" class="text-gray-900 dark:text-white font-semibold border-b-2 border-primary-600 py-5">Profile</a>
+            <a href="/app/settings.html" class="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white py-5">Settings</a>
+          </div>
+        </div>
+        <div class="flex items-center">
+          <button id="logout-btn" class="btn-secondary">Logout</button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-8">My Profile</h1>
+
+    <div class="card mb-6">
+      <h2 class="text-2xl font-bold mb-6 dark:text-white">Personal Information</h2>
+      <div id="profile-info" class="space-y-4">
+        <div><strong class="dark:text-white">Name:</strong> <span id="profile-name" class="text-gray-600 dark:text-gray-400">Loading...</span></div>
+        <div><strong class="dark:text-white">Email:</strong> <span id="profile-email" class="text-gray-600 dark:text-gray-400">Loading...</span></div>
+        <div><strong class="dark:text-white">Contact:</strong> <span id="profile-contact" class="text-gray-600 dark:text-gray-400">Loading...</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2 class="text-2xl font-bold mb-6 dark:text-white">Change Password</h2>
+      <form id="password-form" class="max-w-md">
+        <div class="mb-4">
+          <label class="block text-gray-700 dark:text-gray-300 font-semibold mb-2">Current Password</label>
+          <input type="password" id="current-password" required class="input-field">
+        </div>
+        <div class="mb-4">
+          <label class="block text-gray-700 dark:text-gray-300 font-semibold mb-2">New Password</label>
+          <input type="password" id="new-password" required minlength="6" class="input-field">
+        </div>
+        <div class="mb-6">
+          <label class="block text-gray-700 dark:text-gray-300 font-semibold mb-2">Confirm New Password</label>
+          <input type="password" id="confirm-password" required minlength="6" class="input-field">
+        </div>
+        <button type="submit" class="btn-primary">Update Password</button>
+      </form>
+    </div>
+  </main>
+
+  <script src="/js/common.js"></script>
+  <script>
+    if (!isAuthenticated()) {
+      window.location.href = '/app/login.html';
+    }
+
+    const user = getUserData();
+    if (user) {
+      document.getElementById('profile-name').textContent = user.name;
+      document.getElementById('profile-email').textContent = user.email;
+      document.getElementById('profile-contact').textContent = user.contact || 'Not provided';
+    }
+
+    document.getElementById('logout-btn').addEventListener('click', () => {
+      clearAuth();
+      window.location.href = '/app/login.html';
+    });
+
+    document.getElementById('password-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const newPassword = document.getElementById('new-password').value;
+      const confirmPassword = document.getElementById('confirm-password').value;
+
+      if (newPassword !== confirmPassword) {
+        showToast('Passwords do not match', 'error');
+        return;
+      }
+
+      showToast('Password update feature coming soon!', 'info');
+      e.target.reset();
+    });
+  </script>
+</body>
+</html>

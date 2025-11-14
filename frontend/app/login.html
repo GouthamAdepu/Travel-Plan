@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - Travel Planner</title>
+  <link rel="stylesheet" href="/styles/output.css">
+</head>
+<body class="bg-gray-100 dark:bg-gray-900 min-h-screen flex items-center justify-center">
+  <div class="max-w-md w-full mx-4">
+    <div class="text-center mb-8">
+      <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-2">Welcome Back</h1>
+      <p class="text-gray-600 dark:text-gray-400">Sign in to your account</p>
+    </div>
+
+    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl p-8">
+      <div class="flex border-b border-gray-200 dark:border-gray-700 mb-6">
+        <button class="flex-1 pb-4 font-semibold text-primary-600 border-b-2 border-primary-600" id="login-tab">
+          Login
+        </button>
+        <button class="flex-1 pb-4 font-semibold text-gray-500 dark:text-gray-400" id="register-tab">
+          Register
+        </button>
+      </div>
+
+      <form id="login-form">
+        <div class="mb-4">
+          <label for="login-email" class="block text-gray-700 dark:text-gray-300 font-semibold mb-2">Email</label>
+          <input type="email" id="login-email" required class="input-field" placeholder="you@example.com" value="test@example.com">
+        </div>
+        <div class="mb-6">
+          <label for="login-password" class="block text-gray-700 dark:text-gray-300 font-semibold mb-2">Password</label>
+          <input type="password" id="login-password" required class="input-field" placeholder="••••••••" value="password123">
+        </div>
+        <button type="submit" class="btn-primary w-full">Sign In</button>
+      </form>
+
+      <form id="register-form" class="hidden">
+        <div class="mb-4">
+          <label for="register-name" class="block text-gray-700 dark:text-gray-300 font-semibold mb-2">Full Name</label>
+          <input type="text" id="register-name" required class="input-field" placeholder="John Doe">
+        </div>
+        <div class="mb-4">
+          <label for="register-email" class="block text-gray-700 dark:text-gray-300 font-semibold mb-2">Email</label>
+          <input type="email" id="register-email" required class="input-field" placeholder="you@example.com">
+        </div>
+        <div class="mb-4">
+          <label for="register-contact" class="block text-gray-700 dark:text-gray-300 font-semibold mb-2">Phone (Optional)</label>
+          <input type="tel" id="register-contact" class="input-field" placeholder="+1-555-0000">
+        </div>
+        <div class="mb-6">
+          <label for="register-password" class="block text-gray-700 dark:text-gray-300 font-semibold mb-2">Password</label>
+          <input type="password" id="register-password" required minlength="6" class="input-field" placeholder="••••••••">
+          <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Minimum 6 characters</p>
+        </div>
+        <button type="submit" class="btn-primary w-full">Create Account</button>
+      </form>
+
+      <div class="mt-6 text-center">
+        <a href="/" class="text-primary-600 hover:text-primary-700 dark:text-primary-400">Back to Home</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/common.js"></script>
+  <script>
+    if (isAuthenticated()) {
+      window.location.href = '/app/dashboard.html';
+    }
+
+    const loginTab = document.getElementById('login-tab');
+    const registerTab = document.getElementById('register-tab');
+    const loginForm = document.getElementById('login-form');
+    const registerForm = document.getElementById('register-form');
+
+    loginTab.addEventListener('click', () => {
+      loginTab.classList.add('text-primary-600', 'border-b-2', 'border-primary-600');
+      loginTab.classList.remove('text-gray-500');
+      registerTab.classList.remove('text-primary-600', 'border-b-2', 'border-primary-600');
+      registerTab.classList.add('text-gray-500');
+      loginForm.classList.remove('hidden');
+      registerForm.classList.add('hidden');
+    });
+
+    registerTab.addEventListener('click', () => {
+      registerTab.classList.add('text-primary-600', 'border-b-2', 'border-primary-600');
+      registerTab.classList.remove('text-gray-500');
+      loginTab.classList.remove('text-primary-600', 'border-b-2', 'border-primary-600');
+      loginTab.classList.add('text-gray-500');
+      registerForm.classList.remove('hidden');
+      loginForm.classList.add('hidden');
+    });
+
+    loginForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      showLoading();
+
+      try {
+        const email = document.getElementById('login-email').value;
+        const password = document.getElementById('login-password').value;
+
+        const data = await apiCall('/auth/login', {
+          method: 'POST',
+          body: JSON.stringify({ email, password })
+        });
+
+        setAuth(data.token, data.userId, { name: data.name, email: data.email });
+        showToast('Login successful!', 'success');
+        setTimeout(() => {
+          window.location.href = '/app/dashboard.html';
+        }, 500);
+      } catch (error) {
+        hideLoading();
+        showToast(error.message || 'Login failed', 'error');
+      }
+    });
+
+    registerForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      showLoading();
+
+      try {
+        const name = document.getElementById('register-name').value;
+        const email = document.getElementById('register-email').value;
+        const password = document.getElementById('register-password').value;
+        const contact = document.getElementById('register-contact').value;
+
+        const data = await apiCall('/auth/register', {
+          method: 'POST',
+          body: JSON.stringify({ name, email, password, contact })
+        });
+
+        setAuth(data.token, data.userId, { name: data.name, email: data.email });
+        showToast('Account created successfully!', 'success');
+        setTimeout(() => {
+          window.location.href = '/app/onboarding.html';
+        }, 500);
+      } catch (error) {
+        hideLoading();
+        showToast(error.message || 'Registration failed', 'error');
+      }
+    });
+  </script>
+</body>
+</html>

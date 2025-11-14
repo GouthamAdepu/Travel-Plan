@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - Travel Planner</title>
+  <link rel="stylesheet" href="/styles/output.css">
+</head>
+<body class="bg-gray-50 dark:bg-gray-900">
+  <nav class="bg-white dark:bg-gray-800 shadow-sm sticky top-0 z-40 no-print">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between h-16">
+        <div class="flex items-center">
+          <a href="/app/dashboard.html" class="text-xl font-bold text-primary-600">TravelPlan</a>
+          <div class="hidden md:flex ml-10 space-x-8">
+            <a href="/app/dashboard.html" class="text-gray-900 dark:text-white font-semibold border-b-2 border-primary-600 py-5">Dashboard</a>
+            <a href="/app/profile.html" class="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white py-5">Profile</a>
+            <a href="/app/settings.html" class="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white py-5">Settings</a>
+          </div>
+        </div>
+        <div class="flex items-center space-x-4">
+          <button id="theme-toggle" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700" aria-label="Toggle dark mode">
+            <svg class="w-6 h-6 dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+            </svg>
+          </button>
+          <span class="text-gray-700 dark:text-gray-300" id="user-name"></span>
+          <button id="logout-btn" class="btn-secondary">Logout</button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="mb-8">
+      <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-2">My Trips</h1>
+      <p class="text-gray-600 dark:text-gray-400">Plan and manage your travel adventures</p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-6 mb-8">
+      <div class="card">
+        <div class="flex items-center justify-between">
+          <div>
+            <p class="text-gray-500 dark:text-gray-400 text-sm">Total Trips</p>
+            <p class="text-3xl font-bold text-gray-900 dark:text-white" id="stat-total">0</p>
+          </div>
+          <div class="w-12 h-12 bg-primary-100 dark:bg-primary-900 rounded-full flex items-center justify-center">
+            <svg class="w-6 h-6 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="flex items-center justify-between">
+          <div>
+            <p class="text-gray-500 dark:text-gray-400 text-sm">Upcoming</p>
+            <p class="text-3xl font-bold text-gray-900 dark:text-white" id="stat-upcoming">0</p>
+          </div>
+          <div class="w-12 h-12 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center">
+            <svg class="w-6 h-6 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="flex items-center justify-between">
+          <div>
+            <p class="text-gray-500 dark:text-gray-400 text-sm">Total Budget</p>
+            <p class="text-3xl font-bold text-gray-900 dark:text-white" id="stat-budget">$0</p>
+          </div>
+          <div class="w-12 h-12 bg-purple-100 dark:bg-purple-900 rounded-full flex items-center justify-center">
+            <svg class="w-6 h-6 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
+      <div class="flex-1">
+        <input type="text" id="search-input" placeholder="Search trips..." class="input-field max-w-md" aria-label="Search trips">
+      </div>
+      <div class="flex gap-2">
+        <select id="filter-select" class="input-field" aria-label="Filter trips">
+          <option value="all">All Trips</option>
+          <option value="upcoming">Upcoming</option>
+          <option value="past">Past</option>
+        </select>
+        <a href="/app/create-trip.html" class="btn-primary whitespace-nowrap">
+          <svg class="w-5 h-5 inline-block mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+          </svg>
+          New Trip
+        </a>
+      </div>
+    </div>
+
+    <div id="trips-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="skeleton h-64 rounded-lg"></div>
+      <div class="skeleton h-64 rounded-lg"></div>
+      <div class="skeleton h-64 rounded-lg"></div>
+    </div>
+
+    <div id="empty-state" class="hidden text-center py-16">
+      <svg class="w-24 h-24 mx-auto text-gray-300 dark:text-gray-600 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+      </svg>
+      <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">No trips yet</h3>
+      <p class="text-gray-600 dark:text-gray-400 mb-4">Start planning your first adventure!</p>
+      <a href="/app/create-trip.html" class="btn-primary">Create Your First Trip</a>
+    </div>
+
+    <div id="pagination" class="flex justify-center mt-8 gap-2 hidden">
+      <button id="prev-page" class="px-4 py-2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg disabled:opacity-50" disabled>Previous</button>
+      <span id="page-info" class="px-4 py-2 text-gray-700 dark:text-gray-300"></span>
+      <button id="next-page" class="px-4 py-2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg disabled:opacity-50">Next</button>
+    </div>
+  </main>
+
+  <script src="/js/common.js"></script>
+  <script>
+    if (!isAuthenticated()) {
+      window.location.href = '/app/login.html';
+    }
+
+    const user = getUserData();
+    document.getElementById('user-name').textContent = user?.name || 'User';
+
+    document.getElementById('logout-btn').addEventListener('click', () => {
+      clearAuth();
+      window.location.href = '/app/login.html';
+    });
+
+    document.getElementById('theme-toggle').addEventListener('click', toggleDarkMode);
+
+    let allTrips = [];
+    let currentPage = 1;
+    const perPage = 6;
+
+    async function loadTrips() {
+      try {
+        const userId = getUserId();
+        const trips = await apiCall(`/trips/user/${userId}`);
+        allTrips = trips;
+        updateStats(trips);
+        renderTrips(trips);
+      } catch (error) {
+        showToast('Failed to load trips', 'error');
+        console.error(error);
+      }
+    }
+
+    function updateStats(trips) {
+      const totalTrips = trips.length;
+      const now = new Date();
+      const upcoming = trips.filter(t => new Date(t.startDate) > now).length;
+      const totalBudget = trips.reduce((sum, t) => sum + (t.totalBudget || 0), 0);
+
+      document.getElementById('stat-total').textContent = totalTrips;
+      document.getElementById('stat-upcoming').textContent = upcoming;
+      document.getElementById('stat-budget').textContent = formatCurrency(totalBudget);
+    }
+
+    function renderTrips(trips) {
+      const grid = document.getElementById('trips-grid');
+      const emptyState = document.getElementById('empty-state');
+
+      if (trips.length === 0) {
+        grid.classList.add('hidden');
+        emptyState.classList.remove('hidden');
+        return;
+      }
+
+      grid.classList.remove('hidden');
+      emptyState.classList.add('hidden');
+
+      const start = (currentPage - 1) * perPage;
+      const paginatedTrips = trips.slice(start, start + perPage);
+
+      grid.innerHTML = paginatedTrips.map(trip => {
+        const days = calculateDays(trip.startDate, trip.endDate);
+        const isPast = new Date(trip.endDate) < new Date();
+
+        return `
+          <a href="/app/trip.html?id=${trip.tripId}" class="card hover:shadow-xl transition-shadow block">
+            <div class="flex justify-between items-start mb-3">
+              <h3 class="text-xl font-bold text-gray-900 dark:text-white">${trip.title}</h3>
+              ${isPast ? '<span class="text-xs bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 px-2 py-1 rounded">Past</span>' : '<span class="text-xs bg-green-100 dark:bg-green-900 text-green-700 dark:text-green-300 px-2 py-1 rounded">Upcoming</span>'}
+            </div>
+            <p class="text-gray-600 dark:text-gray-400 mb-4 flex items-center">
+              <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+              </svg>
+              ${trip.destination}
+            </p>
+            <div class="flex justify-between text-sm text-gray-500 dark:text-gray-400 mb-3">
+              <span>${formatDate(trip.startDate)}</span>
+              <span>${days} day${days > 1 ? 's' : ''}</span>
+            </div>
+            <div class="pt-3 border-t border-gray-200 dark:border-gray-700">
+              <p class="text-sm text-gray-600 dark:text-gray-400">Budget: <span class="font-semibold text-gray-900 dark:text-white">${formatCurrency(trip.totalBudget || 0)}</span></p>
+            </div>
+          </a>
+        `;
+      }).join('');
+
+      if (trips.length > perPage) {
+        document.getElementById('pagination').classList.remove('hidden');
+        updatePagination(trips.length);
+      }
+    }
+
+    function updatePagination(total) {
+      const totalPages = Math.ceil(total / perPage);
+      document.getElementById('page-info').textContent = `Page ${currentPage} of ${totalPages}`;
+      document.getElementById('prev-page').disabled = currentPage === 1;
+      document.getElementById('next-page').disabled = currentPage === totalPages;
+    }
+
+    document.getElementById('search-input').addEventListener('input', (e) => {
+      const query = e.target.value.toLowerCase();
+      const filtered = allTrips.filter(t => 
+        t.title.toLowerCase().includes(query) || 
+        t.destination.toLowerCase().includes(query)
+      );
+      currentPage = 1;
+      renderTrips(filtered);
+    });
+
+    document.getElementById('filter-select').addEventListener('change', (e) => {
+      const filter = e.target.value;
+      const now = new Date();
+      let filtered = allTrips;
+
+      if (filter === 'upcoming') {
+        filtered = allTrips.filter(t => new Date(t.startDate) > now);
+      } else if (filter === 'past') {
+        filtered = allTrips.filter(t => new Date(t.endDate) < now);
+      }
+
+      currentPage = 1;
+      renderTrips(filtered);
+    });
+
+    document.getElementById('prev-page')?.addEventListener('click', () => {
+      if (currentPage > 1) {
+        currentPage--;
+        renderTrips(allTrips);
+      }
+    });
+
+    document.getElementById('next-page')?.addEventListener('click', () => {
+      const totalPages = Math.ceil(allTrips.length / perPage);
+      if (currentPage < totalPages) {
+        currentPage++;
+        renderTrips(allTrips);
+      }
+    });
+
+    loadTrips();
+  </script>
+</body>
+</html>

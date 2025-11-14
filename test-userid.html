@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test UserId</title>
+</head>
+<body>
+    <h1>UserId Test</h1>
+    <p>Check the console for userId information</p>
+    <script>
+        console.log('UserId from localStorage:', localStorage.getItem('travel_userId'));
+        console.log('All localStorage items:');
+        for (let i = 0; i < localStorage.length; i++) {
+            const key = localStorage.key(i);
+            console.log(key, localStorage.getItem(key));
+        }
+    </script>
+</body>
+</html>

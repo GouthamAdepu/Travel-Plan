@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Settings - Travel Planner</title>
+  <link rel="stylesheet" href="/styles/output.css">
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 min-h-screen">
+  <nav class="bg-white dark:bg-gray-800 shadow-sm sticky top-0 z-40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between h-16">
+        <div class="flex items-center">
+          <a href="/app/dashboard.html" class="text-xl font-bold text-primary-600">TravelPlan</a>
+          <div class="hidden md:flex ml-10 space-x-8">
+            <a href="/app/dashboard.html" class="text-gray-600 dark:text-gray-300 py-5">Dashboard</a>
+            <a href="/app/profile.html" class="text-gray-600 dark:text-gray-300 py-5">Profile</a>
+            <a href="/app/settings.html" class="text-gray-900 dark:text-white font-semibold border-b-2 border-primary-600 py-5">Settings</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-8">Settings</h1>
+
+    <div class="card mb-6">
+      <h2 class="text-2xl font-bold mb-6 dark:text-white">Appearance</h2>
+      <div class="flex items-center justify-between">
+        <div>
+          <h3 class="font-semibold dark:text-white mb-1">Theme</h3>
+          <p class="text-gray-600 dark:text-gray-400 text-sm">Toggle between light and dark mode</p>
+        </div>
+        <button id="theme-toggle" class="btn-primary" aria-label="Toggle theme">
+          <svg class="w-5 h-5 inline-block mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+          </svg>
+          Toggle Theme
+        </button>
+      </div>
+    </div>
+
+    <div class="card mb-6">
+      <h2 class="text-2xl font-bold mb-6 dark:text-white">Language</h2>
+      <select id="language-select" class="input-field max-w-xs" aria-label="Select language">
+        <option value="en">English</option>
+        <option value="es">Español</option>
+      </select>
+    </div>
+
+    <div class="card">
+      <h2 class="text-2xl font-bold mb-6 dark:text-white">Notifications</h2>
+      <div class="space-y-4">
+        <label class="flex items-center">
+          <input type="checkbox" class="mr-3 w-5 h-5" checked>
+          <div>
+            <div class="font-semibold dark:text-white">Email Notifications</div>
+            <div class="text-sm text-gray-600 dark:text-gray-400">Receive trip reminders via email</div>
+          </div>
+        </label>
+        <label class="flex items-center">
+          <input type="checkbox" class="mr-3 w-5 h-5" checked>
+          <div>
+            <div class="font-semibold dark:text-white">Travel Tips</div>
+            <div class="text-sm text-gray-600 dark:text-gray-400">Get destination recommendations</div>
+          </div>
+        </label>
+      </div>
+    </div>
+  </main>
+
+  <script src="/js/common.js"></script>
+  <script>
+    if (!isAuthenticated()) {
+      window.location.href = '/app/login.html';
+    }
+
+    document.getElementById('theme-toggle').addEventListener('click', () => {
+      toggleDarkMode();
+      showToast('Theme updated', 'success');
+    });
+
+    const currentLang = getCurrentLanguage();
+    document.getElementById('language-select').value = currentLang;
+
+    document.getElementById('language-select').addEventListener('change', (e) => {
+      setLanguage(e.target.value);
+    });
+  </script>
+</body>
+</html>

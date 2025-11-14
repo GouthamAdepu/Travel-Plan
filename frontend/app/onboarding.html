@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome - Travel Planner</title>
+  <link rel="stylesheet" href="/styles/output.css">
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 min-h-screen">
+  <nav class="fixed w-full z-50 bg-transparent transition-all duration-300" id="navbar">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16">
+        <div class="flex items-center">
+          <a href="/" class="text-2xl font-bold text-white">
+            <svg class="w-8 h-8 inline-block mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            TravelPlan
+          </a>
+        </div>
+        <div class="hidden md:flex items-center space-x-8">
+          <a href="/features.html" class="text-white hover:text-gray-200 transition">Features</a>
+          <a href="/pricing.html" class="text-white hover:text-gray-200 transition">Pricing</a>
+          <a href="/about.html" class="text-white hover:text-gray-200 transition">About</a>
+          <a href="/docs/index.html" class="text-white hover:text-gray-200 transition">Docs</a>
+          <a href="/app/dashboard.html" class="btn-primary">Dashboard</a>
+        </div>
+        <button class="md:hidden text-white" id="mobile-menu-btn" aria-label="Toggle menu">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+    <div class="hidden md:hidden bg-primary-700" id="mobile-menu">
+      <div class="px-2 pt-2 pb-3 space-y-1">
+        <a href="/features.html" class="block px-3 py-2 text-white hover:bg-primary-800 rounded">Features</a>
+        <a href="/pricing.html" class="block px-3 py-2 text-white hover:bg-primary-800 rounded">Pricing</a>
+        <a href="/about.html" class="block px-3 py-2 text-white hover:bg-primary-800 rounded">About</a>
+        <a href="/docs/index.html" class="block px-3 py-2 text-white hover:bg-primary-800 rounded">Docs</a>
+        <a href="/app/dashboard.html" class="block px-3 py-2 text-white hover:bg-primary-800 rounded">Dashboard</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="pt-16 min-h-screen flex items-center justify-center">
+    <div class="max-w-2xl mx-auto px-4 py-12">
+      <div class="bg-white dark:bg-gray-800 rounded-lg shadow-2xl p-8">
+        <div class="text-center mb-8">
+          <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-2">Welcome to TravelPlan!</h1>
+          <p class="text-gray-600 dark:text-gray-400">Let's set up your travel preferences</p>
+        </div>
+
+        <div class="mb-8">
+          <div class="flex justify-between items-center mb-4">
+            <span class="text-sm font-semibold text-gray-600 dark:text-gray-400">Step <span id="current-step">1</span> of 3</span>
+            <div class="flex-1 mx-4 bg-gray-200 dark:bg-gray-700 h-2 rounded-full">
+              <div id="progress-bar" class="bg-primary-600 h-2 rounded-full transition-all duration-300" style="width: 33%"></div>
+            </div>
+          </div>
+        </div>
+
+        <div id="step-1" class="step-content">
+          <h2 class="text-xl font-bold mb-4 dark:text-white">What type of traveler are you?</h2>
+          <div class="space-y-3">
+            <label class="flex items-center p-4 border-2 border-gray-200 dark:border-gray-700 rounded-lg cursor-pointer hover:border-primary-600 transition">
+              <input type="radio" name="traveler-type" value="adventure" class="mr-3">
+              <div>
+                <div class="font-semibold dark:text-white">Adventure Seeker</div>
+                <div class="text-sm text-gray-600 dark:text-gray-400">Hiking, extreme sports, outdoor activities</div>
+              </div>
+            </label>
+            <label class="flex items-center p-4 border-2 border-gray-200 dark:border-gray-700 rounded-lg cursor-pointer hover:border-primary-600 transition">
+              <input type="radio" name="traveler-type" value="culture" class="mr-3">
+              <div>
+                <div class="font-semibold dark:text-white">Culture Enthusiast</div>
+                <div class="text-sm text-gray-600 dark:text-gray-400">Museums, historical sites, local experiences</div>
+              </div>
+            </label>
+            <label class="flex items-center p-4 border-2 border-gray-200 dark:border-gray-700 rounded-lg cursor-pointer hover:border-primary-600 transition">
+              <input type="radio" name="traveler-type" value="relaxation" class="mr-3">
+              <div>
+                <div class="font-semibold dark:text-white">Relaxation Focused</div>
+                <div class="text-sm text-gray-600 dark:text-gray-400">Beaches, spas, leisurely activities</div>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <div id="step-2" class="step-content hidden">
+          <h2 class="text-xl font-bold mb-4 dark:text-white">Preferred Budget Range</h2>
+          <div class="space-y-3">
+            <label class="flex items-center p-4 border-2 border-gray-200 dark:border-gray-700 rounded-lg cursor-pointer hover:border-primary-600 transition">
+              <input type="radio" name="budget" value="budget" class="mr-3">
+              <div class="font-semibold dark:text-white">Budget ($50-100/day)</div>
+            </label>
+            <label class="flex items-center p-4 border-2 border-gray-200 dark:border-gray-700 rounded-lg cursor-pointer hover:border-primary-600 transition">
+              <input type="radio" name="budget" value="moderate" class="mr-3">
+              <div class="font-semibold dark:text-white">Moderate ($100-250/day)</div>
+            </label>
+            <label class="flex items-center p-4 border-2 border-gray-200 dark:border-gray-700 rounded-lg cursor-pointer hover:border-primary-600 transition">
+              <input type="radio" name="budget" value="luxury" class="mr-3">
+              <div class="font-semibold dark:text-white">Luxury ($250+/day)</div>
+            </label>
+          </div>
+        </div>
+
+        <div id="step-3" class="step-content hidden">
+          <h2 class="text-xl font-bold mb-4 dark:text-white">Favorite Destinations</h2>
+          <p class="text-gray-600 dark:text-gray-400 mb-4">Select your dream destinations (select all that apply):</p>
+          <div class="space-y-2">
+            <label class="flex items-center"><input type="checkbox" class="mr-2"> <span class="dark:text-white">Europe</span></label>
+            <label class="flex items-center"><input type="checkbox" class="mr-2"> <span class="dark:text-white">Asia</span></label>
+            <label class="flex items-center"><input type="checkbox" class="mr-2"> <span class="dark:text-white">Americas</span></label>
+            <label class="flex items-center"><input type="checkbox" class="mr-2"> <span class="dark:text-white">Africa</span></label>
+            <label class="flex items-center"><input type="checkbox" class="mr-2"> <span class="dark:text-white">Oceania</span></label>
+          </div>
+        </div>
+
+        <div class="flex gap-4 mt-8">
+          <button id="prev-btn" class="btn-secondary flex-1 hidden">Previous</button>
+          <button id="next-btn" class="btn-primary flex-1">Next</button>
+          <button id="finish-btn" class="btn-primary flex-1 hidden">Finish</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/common.js"></script>
+  <script>
+    if (!isAuthenticated()) {
+      window.location.href = '/app/login.html';
+    }
+
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const navbar = document.getElementById('navbar');
+
+    mobileMenuBtn?.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        navbar.classList.remove('bg-transparent');
+        navbar.classList.add('bg-primary-700', 'shadow-lg');
+      } else {
+        navbar.classList.add('bg-transparent');
+        navbar.classList.remove('bg-primary-700', 'shadow-lg');
+      }
+    });
+
+    let currentStep = 1;
+
+    const updateStep = () => {
+      document.querySelectorAll('.step-content').forEach(el => el.classList.add('hidden'));
+      document.getElementById(`step-${currentStep}`).classList.remove('hidden');
+      document.getElementById('current-step').textContent = currentStep;
+      document.getElementById('progress-bar').style.width = `${(currentStep / 3) * 100}%`;
+
+      document.getElementById('prev-btn').classList.toggle('hidden', currentStep === 1);
+      document.getElementById('next-btn').classList.toggle('hidden', currentStep === 3);
+      document.getElementById('finish-btn').classList.toggle('hidden', currentStep !== 3);
+    };
+
+    document.getElementById('next-btn').addEventListener('click', () => {
+      if (currentStep < 3) {
+        currentStep++;
+        updateStep();
+      }
+    });
+
+    document.getElementById('prev-btn').addEventListener('click', () => {
+      if (currentStep > 1) {
+        currentStep--;
+        updateStep();
+      }
+    });
+
+    document.getElementById('finish-btn').addEventListener('click', () => {
+      showToast('Welcome! Let\'s start planning your trips!', 'success');
+      setTimeout(() => {
+        window.location.href = '/app/dashboard.html';
+      }, 1000);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us - Travel Planner</title>
+  <link rel="stylesheet" href="/styles/output.css">
+</head>
+<body class="bg-white dark:bg-gray-900">
+  <nav class="bg-primary-700 text-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16">
+        <a href="/" class="text-2xl font-bold">TravelPlan</a>
+        <a href="/" class="hover:text-gray-200">Back to Home</a>
+      </div>
+    </div>
+  </nav>
+
+  <section class="py-20 max-w-4xl mx-auto px-4">
+    <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-8">Contact Us</h1>
+    
+    <div class="card">
+      <form id="contact-form">
+        <div class="mb-4">
+          <label class="block font-semibold mb-2 dark:text-white">Name *</label>
+          <input type="text" id="name" required class="input-field">
+        </div>
+        <div class="mb-4">
+          <label class="block font-semibold mb-2 dark:text-white">Email *</label>
+          <input type="email" id="email" required class="input-field">
+        </div>
+        <div class="mb-4">
+          <label class="block font-semibold mb-2 dark:text-white">Subject</label>
+          <input type="text" id="subject" class="input-field">
+        </div>
+        <div class="mb-6">
+          <label class="block font-semibold mb-2 dark:text-white">Message *</label>
+          <textarea id="message" required rows="6" class="input-field"></textarea>
+        </div>
+        <button type="submit" class="btn-primary">Send Message</button>
+      </form>
+    </div>
+  </section>
+
+  <script src="/js/common.js"></script>
+  <script>
+    document.getElementById('contact-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      showLoading();
+
+      const data = {
+        name: document.getElementById('name').value,
+        email: document.getElementById('email').value,
+        subject: document.getElementById('subject').value,
+        message: document.getElementById('message').value
+      };
+
+      try {
+        await fetch('/api/contact', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify(data)
+        });
+
+        hideLoading();
+        showToast('Message sent successfully!', 'success');
+        e.target.reset();
+      } catch (error) {
+        hideLoading();
+        showToast('Failed to send message', 'error');
+      }
+    });
+  </script>
+</body>
+</html>

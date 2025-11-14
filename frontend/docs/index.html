@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>API Documentation - Travel Planner</title>
+  <link rel="stylesheet" href="/styles/output.css">
+</head>
+<body class="bg-white dark:bg-gray-900">
+  <nav class="bg-primary-700 text-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16">
+        <a href="/" class="text-2xl font-bold">TravelPlan</a>
+        <a href="/" class="hover:text-gray-200">Home</a>
+      </div>
+    </div>
+  </nav>
+
+  <section class="py-20 max-w-6xl mx-auto px-4">
+    <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-8">API Documentation</h1>
+    <p class="text-gray-600 dark:text-gray-400 mb-12">Complete reference for Travel Planner API</p>
+
+    <div class="space-y-8">
+      <div class="card">
+        <h2 class="text-2xl font-bold mb-4 dark:text-white">Authentication</h2>
+        <p class="text-gray-600 dark:text-gray-400 mb-4">All API requests require JWT authentication via Bearer token.</p>
+        <pre class="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg overflow-x-auto"><code>Authorization: Bearer YOUR_TOKEN_HERE</code></pre>
+      </div>
+
+      <div class="card">
+        <h3 class="text-xl font-bold mb-2 dark:text-white">POST /api/auth/register</h3>
+        <p class="text-gray-600 dark:text-gray-400 mb-4">Register a new user account</p>
+        <div class="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg mb-4">
+          <p class="text-sm text-gray-600 dark:text-gray-400 mb-2">Request Body:</p>
+          <pre><code>{
+  "name": "John Doe",
+  "email": "john@example.com",
+  "password": "password123",
+  "contact": "+1-555-0000"
+}</code></pre>
+        </div>
+        <div class="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg">
+          <p class="text-sm text-gray-600 dark:text-gray-400 mb-2">Response:</p>
+          <pre><code>{
+  "userId": "abc123",
+  "token": "eyJhbGciOiJIUzI1...",
+  "name": "John Doe",
+  "email": "john@example.com"
+}</code></pre>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 class="text-xl font-bold mb-2 dark:text-white">POST /api/trips</h3>
+        <p class="text-gray-600 dark:text-gray-400 mb-4">Create a new trip</p>
+        <div class="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg mb-4">
+          <p class="text-sm text-gray-600 dark:text-gray-400 mb-2">Request Body:</p>
+          <pre><code>{
+  "title": "Tokyo Adventure",
+  "destination": "Tokyo, Japan",
+  "startDate": "2024-06-01",
+  "endDate": "2024-06-10",
+  "totalBudget": 3000
+}</code></pre>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 class="text-xl font-bold mb-2 dark:text-white">GET /api/trips/:id/budget</h3>
+        <p class="text-gray-600 dark:text-gray-400 mb-4">Calculate trip budget breakdown</p>
+        <div class="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg">
+          <p class="text-sm text-gray-600 dark:text-gray-400 mb-2">Response:</p>
+          <pre><code>{
+  "activitiesTotal": 170,
+  "accommodationTotal": 1350,
+  "expensesTotal": 700,
+  "totalBudget": 2220
+}</code></pre>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 class="text-xl font-bold mb-2 dark:text-white">POST /api/ai/itinerary-suggest</h3>
+        <p class="text-gray-600 dark:text-gray-400 mb-4">Get AI-powered itinerary suggestions</p>
+        <div class="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg mb-4">
+          <p class="text-sm text-gray-600 dark:text-gray-400 mb-2">Request Body:</p>
+          <pre><code>{
+  "destination": "Paris, France",
+  "dates": {
+    "start": "2024-08-15",
+    "end": "2024-08-22"
+  },
+  "preferences": "Art museums and French cuisine"
+}</code></pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="bg-gray-900 text-white py-12">
+    <div class="max-w-7xl mx-auto px-4 text-center">
+      <p>&copy; 2024 TravelPlan. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="/js/common.js"></script>
+</body>
+</html>

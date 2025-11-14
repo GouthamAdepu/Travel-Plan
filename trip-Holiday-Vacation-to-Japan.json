@@ -1,0 +1,78 @@
+{
+  "tripId": "e5c4f4b4239775dc639eace02a60cf5c",
+  "userId": "dev-user-id",
+  "title": "Holiday Vacation to Japan",
+  "destination": "Japan",
+  "startDate": "2026-01-01T00:00:00.000Z",
+  "endDate": "2026-03-01T00:00:00.000Z",
+  "totalBudget": 3000,
+  "createdAt": "2025-11-14T22:46:12.736Z",
+  "itinerary": [
+    {
+      "itineraryId": "94c379b13567d0edee65ff7d6baa8371",
+      "tripId": "e5c4f4b4239775dc639eace02a60cf5c",
+      "day": 1,
+      "activity": "Local Museum Visit",
+      "location": "Central Museum, Japan",
+      "startTime": "09:00",
+      "endTime": "17:00",
+      "costPerNight": 25,
+      "notes": ""
+    },
+    {
+      "itineraryId": "cdf5dbf51bce4468bf62a6ae8174fc35",
+      "tripId": "e5c4f4b4239775dc639eace02a60cf5c",
+      "day": 1,
+      "activity": "Historic Landmark Tour",
+      "location": "Old Town, Japan",
+      "startTime": "09:00",
+      "endTime": "17:00",
+      "costPerNight": 15,
+      "notes": ""
+    },
+    {
+      "itineraryId": "a74657ad20744877806f52d3e69ba83e",
+      "tripId": "e5c4f4b4239775dc639eace02a60cf5c",
+      "day": 1,
+      "activity": "Local Cuisine Experience",
+      "location": "Popular Restaurant District, Japan",
+      "startTime": "09:00",
+      "endTime": "17:00",
+      "costPerNight": 40,
+      "notes": ""
+    },
+    {
+      "itineraryId": "60b42165f5f222950fdae28058e3d335",
+      "tripId": "e5c4f4b4239775dc639eace02a60cf5c",
+      "day": 1,
+      "activity": "City Walking Tour",
+      "location": "Downtown Area, Japan",
+      "startTime": "09:00",
+      "endTime": "17:00",
+      "costPerNight": 0,
+      "notes": ""
+    },
+    {
+      "itineraryId": "bba72febb7f174597ada4b0b82699382",
+      "tripId": "e5c4f4b4239775dc639eace02a60cf5c",
+      "day": 1,
+      "activity": "Scenic Park Exploration",
+      "location": "Central Park, Japan",
+      "startTime": "09:00",
+      "endTime": "17:00",
+      "costPerNight": 0,
+      "notes": ""
+    }
+  ],
+  "accommodation": [
+    {
+      "accommodationId": "5533d8608efc3acafa9e0c2a0626de04",
+      "tripId": "e5c4f4b4239775dc639eace02a60cf5c",
+      "hotelName": "SR Hotel",
+      "address": "Kyoto, Japan",
+      "checkInDate": "2026-01-03T00:00:00.000Z",
+      "checkOutDate": "2026-03-01T00:00:00.000Z",
+      "costPerNight": 50
+    }
+  ]
+}

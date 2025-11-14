@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard - Travel Planner</title>
+  <link rel="stylesheet" href="/styles/output.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 min-h-screen">
+  <nav class="bg-white dark:bg-gray-800 shadow-sm sticky top-0 z-40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between h-16">
+        <div class="flex items-center">
+          <h1 class="text-xl font-bold text-primary-600">Admin Dashboard</h1>
+        </div>
+        <div class="flex items-center">
+          <a href="/app/dashboard.html" class="text-gray-600 dark:text-gray-300 hover:text-gray-900">Back to App</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="grid md:grid-cols-3 gap-6 mb-8">
+      <div class="card">
+        <p class="text-gray-500 dark:text-gray-400 text-sm">Total Users</p>
+        <p class="text-4xl font-bold text-gray-900 dark:text-white" id="total-users">0</p>
+      </div>
+      <div class="card">
+        <p class="text-gray-500 dark:text-gray-400 text-sm">Total Trips</p>
+        <p class="text-4xl font-bold text-gray-900 dark:text-white" id="total-trips">0</p>
+      </div>
+      <div class="card">
+        <p class="text-gray-500 dark:text-gray-400 text-sm">Active Users (7d)</p>
+        <p class="text-4xl font-bold text-gray-900 dark:text-white">247</p>
+      </div>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-8">
+      <div class="card">
+        <h2 class="text-2xl font-bold mb-4 dark:text-white">Top Destinations</h2>
+        <canvas id="destinationsChart"></canvas>
+      </div>
+
+      <div class="card">
+        <h2 class="text-2xl font-bold mb-4 dark:text-white">Recent Users</h2>
+        <div id="users-list"></div>
+      </div>
+    </div>
+
+    <div class="card mt-8">
+      <h2 class="text-2xl font-bold mb-4 dark:text-white">Recent Trips</h2>
+      <div id="trips-list"></div>
+    </div>
+  </main>
+
+  <script src="/js/common.js"></script>
+  <script>
+    if (!isAuthenticated()) {
+      window.location.href = '/app/login.html';
+    }
+
+    async function loadStats() {
+      try {
+        const stats = await apiCall('/admin/stats');
+        document.getElementById('total-users').textContent = stats.totalUsers;
+        document.getElementById('total-trips').textContent = stats.totalTrips;
+
+        const ctx = document.getElementById('destinationsChart').getContext('2d');
+        new Chart(ctx, {
+          type: 'doughnut',
+          data: {
+            labels: stats.commonDestinations || ['Tokyo', 'Paris', 'New York'],
+            datasets: [{
+              data: [35, 30, 25],
+              backgroundColor: ['#3b82f6', '#10b981', '#f59e0b']
+            }]
+          },
+          options: {
+            responsive: true,
+            plugins: {
+              legend: {
+                position: 'bottom'
+              }
+            }
+          }
+        });
+      } catch (error) {
+        if (error.message.includes('403')) {
+          showToast('Admin access required', 'error');
+          setTimeout(() => window.location.href = '/app/dashboard.html', 2000);
+        } else {
+          showToast('Failed to load stats', 'error');
+        }
+      }
+    }
+
+    async function loadUsers() {
+      try {
+        const users = await apiCall('/admin/users');
+        document.getElementById('users-list').innerHTML = users.slice(0, 5).map(user => `
+          <div class="flex justify-between items-center py-3 border-b border-gray-200 dark:border-gray-700 last:border-0">
+            <div>
+              <p class="font-semibold dark:text-white">${user.name}</p>
+              <p class="text-sm text-gray-500">${user.email}</p>
+            </div>
+          </div>
+        `).join('');
+      } catch (error) {
+        console.error('Failed to load users', error);
+      }
+    }
+
+    async function loadTrips() {
+      try {
+        const trips = await apiCall('/admin/trips');
+        document.getElementById('trips-list').innerHTML = trips.slice(0, 10).map(trip => `
+          <div class="flex justify-between items-center py-3 border-b border-gray-200 dark:border-gray-700 last:border-0">
+            <div>
+              <p class="font-semibold dark:text-white">${trip.title}</p>
+              <p class="text-sm text-gray-500">${trip.destination}</p>
+            </div>
+            <p class="text-sm text-gray-500">${formatDate(trip.startDate)}</p>
+          </div>
+        `).join('');
+      } catch (error) {
+        console.error('Failed to load trips', error);
+      }
+    }
+
+    loadStats();
+    loadUsers();
+    loadTrips();
+  </script>
+</body>
+</html>

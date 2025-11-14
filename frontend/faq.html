@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FAQ - Travel Planner</title>
+  <link rel="stylesheet" href="/styles/output.css">
+</head>
+<body class="bg-white dark:bg-gray-900">
+  <nav class="bg-primary-700 text-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16">
+        <a href="/" class="text-2xl font-bold">TravelPlan</a>
+        <a href="/" class="hover:text-gray-200">Home</a>
+      </div>
+    </div>
+  </nav>
+
+  <section class="py-20 max-w-4xl mx-auto px-4">
+    <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-12 text-center">Frequently Asked Questions</h1>
+    
+    <div class="space-y-4">
+      <details class="card group">
+        <summary class="font-semibold text-lg cursor-pointer list-none flex justify-between items-center dark:text-white">
+          How does the AI itinerary suggestion work?
+          <span class="transform group-open:rotate-180 transition-transform">▼</span>
+        </summary>
+        <p class="mt-4 text-gray-600 dark:text-gray-400">Our AI uses Google's Gemini model to analyze your destination, travel dates, and preferences to generate personalized activity suggestions. The AI considers popular attractions, local events, and your specific interests to create an optimized itinerary.</p>
+      </details>
+
+      <details class="card group">
+        <summary class="font-semibold text-lg cursor-pointer list-none flex justify-between items-center dark:text-white">
+          Is my data secure?
+          <span class="transform group-open:rotate-180 transition-transform">▼</span>
+        </summary>
+        <p class="mt-4 text-gray-600 dark:text-gray-400">Yes! We use industry-standard encryption for data transmission (HTTPS), password hashing with bcrypt, and secure JWT tokens for authentication. Your password is never stored in plain text, and your trip data is private to your account.</p>
+      </details>
+
+      <details class="card group">
+        <summary class="font-semibold text-lg cursor-pointer list-none flex justify-between items-center dark:text-white">
+          Can I print my itinerary?
+          <span class="transform group-open:rotate-180 transition-transform">▼</span>
+        </summary>
+        <p class="mt-4 text-gray-600 dark:text-gray-400">Absolutely! Each trip has a print button that generates a beautifully formatted, printer-friendly version of your itinerary. You can also export your trip data as JSON for backup purposes.</p>
+      </details>
+
+      <details class="card group">
+        <summary class="font-semibold text-lg cursor-pointer list-none flex justify-between items-center dark:text-white">
+          How is the budget calculated?
+          <span class="transform group-open:rotate-180 transition-transform">▼</span>
+        </summary>
+        <p class="mt-4 text-gray-600 dark:text-gray-400">The budget is automatically calculated from three sources: Activities (itinerary items), Accommodations (hotels with per-night costs multiplied by nights), and Expenses (miscellaneous costs you add). The total is updated in real-time as you add or modify items.</p>
+      </details>
+
+      <details class="card group">
+        <summary class="font-semibold text-lg cursor-pointer list-none flex justify-between items-center dark:text-white">
+          Do I need an API key for Gemini?
+          <span class="transform group-open:rotate-180 transition-transform">▼</span>
+        </summary>
+        <p class="mt-4 text-gray-600 dark:text-gray-400">If you're self-hosting, you'll need your own Gemini API key from Google AI Studio. For the hosted version at travelplanner.com, we provide the API integration as part of the Pro plan.</p>
+      </details>
+
+      <details class="card group">
+        <summary class="font-semibold text-lg cursor-pointer list-none flex justify-between items-center dark:text-white">
+          Can I collaborate with others on a trip?
+          <span class="transform group-open:rotate-180 transition-transform">▼</span>
+        </summary>
+        <p class="mt-4 text-gray-600 dark:text-gray-400">Trip collaboration is available on the Team plan. This allows multiple users to view and edit the same trip, making group travel planning seamless.</p>
+      </details>
+
+      <details class="card group">
+        <summary class="font-semibold text-lg cursor-pointer list-none flex justify-between items-center dark:text-white">
+          Is there a mobile app?
+          <span class="transform group-open:rotate-180 transition-transform">▼</span>
+        </summary>
+        <p class="mt-4 text-gray-600 dark:text-gray-400">The web app is fully responsive and works great on mobile browsers. You can also install it as a Progressive Web App (PWA) on your phone for an app-like experience with offline support for viewing cached pages.</p>
+      </details>
+
+      <details class="card group">
+        <summary class="font-semibold text-lg cursor-pointer list-none flex justify-between items-center dark:text-white">
+          How do I delete my account?
+          <span class="transform group-open:rotate-180 transition-transform">▼</span>
+        </summary>
+        <p class="mt-4 text-gray-600 dark:text-gray-400">You can request account deletion by emailing support@travelplanner.com. We'll permanently delete all your data within 30 days of your request.</p>
+      </details>
+    </div>
+
+    <div class="text-center mt-12">
+      <p class="text-gray-600 dark:text-gray-400 mb-4">Still have questions?</p>
+      <a href="/contact.html" class="btn-primary">Contact Support</a>
+    </div>
+  </section>
+
+  <footer class="bg-gray-900 text-white py-12">
+    <div class="max-w-7xl mx-auto px-4 text-center">
+      <p>&copy; 2024 TravelPlan. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="/js/common.js"></script>
+</body>
+</html>
